@@ -35,8 +35,10 @@ namespace Demo_Application
                 bool isUserPermission = userList.Where(w => w.Id == Convert.ToInt32(userId) && w.Right == _right).Any();
                 if (!isUserPermission)
                 {
-                    var _res = new { status = 401, Message = "Unauthorized Access", Data = "Unauthorized Access" };
-                    context.Result = new JsonResult(_res);
+                    var _res = new { Message = "Unauthorized Access", Data = "Unauthorized Access" };
+                    var result = new JsonResult(_res);
+                    result.StatusCode = 401;
+                    context.Result = result;
                     return;
                 }
                 
